@@ -1,10 +1,10 @@
-public class Tile{
+public class Tile implements Luminosity{
 
     private Color color;
     private Figure figure;
     private String position;
     private int status;
-    
+    private int luminosityChange=0;
 
     public static final String RIGHT="R";
     public static final String UP="U";
@@ -21,6 +21,7 @@ public class Tile{
         this.figure=figure;
         this.status=status;
     }
+    
     // Tile(Circle circle, Color color, String position, int status){
     //     this.color = color;
     //     this.position=position;
@@ -81,6 +82,17 @@ public class Tile{
     }
     public Figure getFigure(){
         return this.figure;
+    }
+
+    public int getLuminosityChange() {
+        return luminosityChange;
+    }
+    public void setLuminosityChange(int luminosityChange) {
+        this.luminosityChange = luminosityChange;
+    }
+
+    public void changeLuminosity(int value){
+        this.luminosityChange+=value;
     }
 
     public boolean isEqualTo(Tile tile){

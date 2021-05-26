@@ -1,13 +1,15 @@
 import java.util.*;
-public class RectangularRegion implements Comparator<RectangularRegion>{
+public class RectangularRegion implements Comparator<RectangularRegion>,Luminosity{
 
     private String name;
     private Coordinate origin;
     private int h;
     private int w;
     private ArrayList<Coordinate> coordinates;
+    private Mosaic rrmosaic;
 
     public RectangularRegion(Mosaic m,String name, int r0, int c0,int h,int w){
+        this.rrmosaic=m;
         this.name=name;
         this.origin= new Coordinate(r0,c0);
         this.h=h;
@@ -26,6 +28,20 @@ public class RectangularRegion implements Comparator<RectangularRegion>{
         
     }
 
+    public void changeLuminosity(int value){
+        for (Coordinate c : this.coordinates){
+            this.rrmosaic.getTile(c).changeLuminosity(value);
+        }
+    }
+
+    public Mosaic getRrmosaic() {
+        return this.rrmosaic;
+    }
+
+    public void setRrmosaic(Mosaic rrmosaic) {
+        this.rrmosaic = rrmosaic;
+    }
+    
     public String getName(){
         return this.name;
     }

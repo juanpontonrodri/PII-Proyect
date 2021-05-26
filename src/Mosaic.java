@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Mosaic {
+public class Mosaic implements Luminosity{
 
     private TreeMap<Coordinate, Tile> mapTiles;
 	private int rows;
@@ -221,6 +221,13 @@ public class Mosaic {
             if((tile.hasFigure())&& (figureClass.equals(tile.getFigure().getClass().getSimpleName()))) num++;
             }
         return num;
+    }
+
+    public void changeLuminosity(int value){
+        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()) {
+            Tile tile = object.getValue();
+            tile.changeLuminosity(value);
+        }
     }
 
     // Getters
