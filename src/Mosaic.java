@@ -159,7 +159,16 @@ public class Mosaic implements Luminosity{
         }
     }
     
-    
+    public String toString(){     
+        String linep=this.rows+"x"+this.columns+","+this.heightTile+"x"+this.widthTile+"\n"; 
+        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){
+            Tile tile = object.getValue();
+            Coordinate coordinate = object.getKey();
+            linep=linep.concat("(" + (coordinate.getRow()) + "," + (coordinate.getColumn()) + ")" + ":" + tile.toString()+"\n");
+        }
+        return linep;       
+        }
+
     public void saveToFile(String file){
         int r;
         int g;
@@ -221,17 +230,6 @@ public class Mosaic implements Luminosity{
     public void sortRegionsByAreaAsc(){
         Collections.sort(this.regions,RectangularRegion.comp);
     }
-
-    public String toString(){     
-        String linep=this.rows+"x"+this.columns+","+this.heightTile+"x"+this.widthTile+"\n"; 
-        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){
-            Tile tile = object.getValue();
-            Coordinate coordinate = object.getKey();
-            linep=linep.concat("(" + (coordinate.getRow()) + "," + (coordinate.getColumn()) + ")" + ":" + tile.toString()+"\n");
-        }
-        return linep;       
-        }
-
 
     public String toStringRegions(){
         String string="";
