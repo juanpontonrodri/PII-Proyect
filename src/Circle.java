@@ -21,7 +21,7 @@ public class Circle extends Figure {
     }
     
     public boolean isEqualTo(Circle circle) {	
-        return ((this.color.isEqualTo(circle.getColor()))&&(this.radius==circle.radius));
+        return ((this.color.isEqualTo(circle.getColor()))&&(this.radius==circle.getRadius()));
     }
     @Override
     public String toString() {                

@@ -18,15 +18,16 @@ public class Rectangle extends Figure {
     }
 
     public double area(){
-        return (width*height)/100.00;
+        return (this.width*this.height)/100.00;
     }
     public boolean isEqualTo(Rectangle rectangle) {		
-        return ((this.color.isEqualTo(rectangle.color))&&(this.width==rectangle.width)&&(this.height==rectangle.height));     
+        return ((this.color.isEqualTo(rectangle.getColor()))&&(this.width==rectangle.getWidth())&&(this.height==rectangle.getHeight()));     
     }
+    
     @Override
     public String toString() {
                 
-        return "Width: " + width + ", Height:" + height + ", Color: " + this.color;
+        return "Width: " + this.width + ", Height:" + this.height + ", Color: " + this.color;
                 
     }	
 

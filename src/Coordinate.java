@@ -9,7 +9,7 @@ public class Coordinate implements Comparable<Coordinate>{
     }
 
     public String toString(){
-        return "("+row+","+column+")";
+        return "("+this.row+","+this.column+")";
     }
 
     public int compareTo(Coordinate c) { //compares by ascendig coordinate

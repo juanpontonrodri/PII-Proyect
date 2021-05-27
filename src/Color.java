@@ -52,7 +52,7 @@ public class Color {
     }
 
     public boolean isEqualTo (Color color) {
-        return ((this.r==color.r)&&(this.g==color.g)&&(this.b==color.b)) ;
+        return ((this.r==color.getR())&&(this.g==color.getG())&&(this.b==color.getB())) ;
     }
 
     public String toString() {
