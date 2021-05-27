@@ -12,6 +12,7 @@ public class MosaicProject{
         int status;
         int row;
         int column;
+        PrintWriter output = null; 
         String regionname=null;
 	    try {
 		    input = new Scanner (new FileInputStream(file)) ;
@@ -43,7 +44,7 @@ public class MosaicProject{
                     int heigh=Integer.parseInt(argument.substring(coma2+1, coma3));
                     int width=Integer.parseInt(argument.substring(coma3+1,argument.length()));
                     System.out.println(name+" "+orow+" "+ocol+" "+heigh+" "+width);
-                    new RectangularRegion(mosaic, name, orow, ocol, heigh, width);
+                    if(mosaic!=null)mosaic.addRegion(new RectangularRegion(mosaic, name, orow, ocol, heigh, width));
 
                     break;
                 case "ChangeLuminosityMosaic":
@@ -77,10 +78,29 @@ public class MosaicProject{
                     if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).setStatus(status);
                     break;
                 case "SortRegionsByArea":
-                if(mosaic!=null)mosaic.sortRegionsByAreaAsc();
+                    if(mosaic!=null)mosaic.sortRegionsByAreaAsc();
+                    output = null;       
+                    try {      
+                        output = new PrintWriter (new FileOutputStream(argument));              
+                    }
+                    catch (FileNotFoundException e) {
+                        System.out.println("FileNotFoundException");
+                        System.exit(-1);
+                    }        
+                    if(mosaic!=null)output.println(mosaic.toStringRegions());
+                    output.close();
                     break;
                 case "SaveMosaic":
-
+                    output = null;       
+                    try {      
+                        output = new PrintWriter (new FileOutputStream(argument));              
+                    }
+                    catch (FileNotFoundException e) {
+                        System.out.println("FileNotFoundException");
+                        System.exit(-1);
+                    }        
+                    if(mosaic!=null)mosaic.saveToFile(argument);
+                    output.close();
                     break;
                 default:
                     break;

@@ -154,7 +154,25 @@ public class Mosaic implements Luminosity{
         }
     
     public void saveToFile(String file){
-        
+        int r;
+        int g;
+        int b;
+        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()) {
+            Tile tile = object.getValue();
+            if(tile.getLuminosityChange()!=0){
+                r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
+                g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
+                b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
+                tile.setColor(new Color(r, g, b));
+
+                r=(tile.getLuminosityChange()+tile.getFigure().getColor().getR())%256;
+                g=(tile.getLuminosityChange()+tile.getFigure().getColor().getG())%256;
+                b=(tile.getLuminosityChange()+tile.getFigure().getColor().getB())%256;
+                tile.getFigure().setColor(new Color(r, g, b));
+                
+            }
+        }
+
         PrintWriter output = null;       
         try {      
             output = new PrintWriter (new FileOutputStream(file));              
@@ -163,7 +181,7 @@ public class Mosaic implements Luminosity{
             System.out.println("Error creating the file");
             System.exit(-1);
         }        
-        output.println(toString());
+        output.println(this.toString());
         output.close();
         
         }
