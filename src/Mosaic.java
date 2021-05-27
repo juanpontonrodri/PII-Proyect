@@ -230,6 +230,13 @@ public class Mosaic implements Luminosity{
         }
     }
 
+    public void changeStatus(int status){
+        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()) {
+            Tile tile = object.getValue();
+            tile.setStatus(status);
+        }
+    }
+
     // Getters
     public int getRow(){
         return this.rows;

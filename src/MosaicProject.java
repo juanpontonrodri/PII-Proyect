@@ -6,8 +6,13 @@ public class MosaicProject{
     public static void main(String[] args) {	
         String file=args[1];
         Mosaic mosaic=null;	
-        RectangularRegion region=null;
+        // RectangularRegion region=null;
         Scanner input=null;
+        int value;
+        int status;
+        int row;
+        int column;
+        String regionname=null;
 	    try {
 		    input = new Scanner (new FileInputStream(file)) ;
         }
@@ -37,30 +42,42 @@ public class MosaicProject{
                     int coma3=argument.indexOf(",",coma2+1);
                     int heigh=Integer.parseInt(argument.substring(coma2+1, coma3));
                     int width=Integer.parseInt(argument.substring(coma3+1,argument.length()));
-                    
-                    region = new RectangularRegion(mosaic, name, orow, ocol, heigh, width);
+                    System.out.println(name+" "+orow+" "+ocol+" "+heigh+" "+width);
+                    new RectangularRegion(mosaic, name, orow, ocol, heigh, width);
 
                     break;
                 case "ChangeLuminosityMosaic":
-                    
+                    value=Integer.parseInt(argument);
+                    if(mosaic!=null)mosaic.changeLuminosity(value);
                     break;
                 case "ChangeLuminosityRegion":
-
+                    value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
+                    regionname=argument.substring(argument.indexOf(",")+1,argument.length());
+                    if(mosaic!=null)mosaic.getRegion(regionname).changeLuminosity(value);
                     break;
                 case "ChangeLuminosityTile":
-
+                    value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
+                    row=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
+                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1), argument.length()));
+                    System.out.println(row+""+column);
+                    if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).changeLuminosity(value);
                     break;
                 case "ChangeStatusMosaic":
-
+                    if(mosaic!=null)mosaic.changeStatus(Integer.parseInt(argument));
                     break;
                 case "ChangeStatusRegion":
-
+                    status=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
+                    regionname=argument.substring(argument.indexOf(",")+1,argument.length());
+                    if(mosaic!=null)mosaic.getRegion(regionname).changeStatus(status);
                     break;
                 case "ChangeStatusTile":
-
+                    status=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
+                    row=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
+                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1),argument.length()));
+                    if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).setStatus(status);
                     break;
                 case "SortRegionsByArea":
-
+                if(mosaic!=null)mosaic.sortRegionsByAreaAsc();
                     break;
                 case "SaveMosaic":
 

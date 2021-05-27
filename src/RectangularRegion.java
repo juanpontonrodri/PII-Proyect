@@ -34,6 +34,12 @@ public class RectangularRegion implements Comparator<RectangularRegion>,Luminosi
         }
     }
 
+    public void changeStatus(int status){
+        for (Coordinate c : this.coordinates){
+            this.rrmosaic.getTile(c).setStatus(status);
+        }
+    }
+
     public Mosaic getRrmosaic() {
         return this.rrmosaic;
     }
