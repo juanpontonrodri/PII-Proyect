@@ -22,11 +22,11 @@ public class MosaicProject{
         String line=null;
         while(input.hasNextLine()){
             line=input.nextLine();
-            System.out.println(line);
+            // System.out.println(line);
             String inst=line.substring(0, line.indexOf(" "));
             // System.out.println(inst);
             String argument=line.substring(line.indexOf(" ")+1,line.length());
-            System.out.println(argument);
+            // System.out.println(argument);
 
             switch (inst) {
                 case "ReadMosaic":
@@ -51,16 +51,15 @@ public class MosaicProject{
                 case "ChangeLuminosityRegion":
                     value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     regionname=argument.substring(argument.indexOf(",")+1,argument.length());
-                    System.out.println(value);
-                    System.out.println(regionname);
-                    System.out.println(mosaic.getRegion(regionname).toString());
+                    // System.out.println(value);
+                    // System.out.println(regionname);
+                    // System.out.println(mosaic.getRegion(regionname).toString());
                     if(mosaic!=null)mosaic.getRegion(regionname).changeLuminosity(value);
                     break;
                 case "ChangeLuminosityTile":
                     value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     row=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
                     column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1)+1, argument.length()));
-                    System.out.println(row+""+column);
                     if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).changeLuminosity(value);
                     break;
                 case "ChangeStatusMosaic":

@@ -29,9 +29,7 @@ public class RectangularRegion implements Comparator<RectangularRegion>,Luminosi
 
     public void changeLuminosity(int value){
         for (Coordinate c : this.coordinates){
-            System.out.println(c.toString());
             this.rrmosaic.getTile(c).changeLuminosity(value);
-            System.out.println("check");
         }
     }
 
