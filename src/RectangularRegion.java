@@ -14,23 +14,23 @@ public class RectangularRegion implements Comparator<RectangularRegion>,Luminosi
         this.origin= new Coordinate(r0,c0);
         this.h=h;
         this.w=w;
-        if (c0>m.getColumn()) this.origin.setColumn(1);
         if (r0>m.getRow()) this.origin.setRow(1);
-        if (this.origin.getColumn()+this.h>(m.getColumn()+1)) this.h=m.getColumn()-this.origin.getColumn()+1;
-        if (this.origin.getRow()+this.w>(m.getColumn()+1)) this.w=m.getRow()-this.origin.getRow()+1;
+        if (c0>m.getColumn()) this.origin.setColumn(1);
+        if ((this.origin.getRow()+this.w)>(m.getRow()+1)) this.w=m.getRow()-this.origin.getRow()+1;
+        if ((this.origin.getColumn()+this.h)>(m.getColumn()+1)) this.h=m.getColumn()-this.origin.getColumn()+1;
         this.coordinates=new ArrayList<>();
-        for (int i = this.origin.getColumn(); i < this.h+this.origin.getColumn(); i++) {
-            for (int j = this.origin.getRow(); j < this.w+this.origin.getRow(); j++) {
+        for (int i = this.origin.getColumn(); i < (this.h+this.origin.getColumn()); i++) {
+            for (int j = this.origin.getRow(); j < (this.w+this.origin.getRow()); j++) {
                 coordinates.add(new Coordinate(i,j));                
             }
-            
         }
         
     }
 
     public void changeLuminosity(int value){
         for (Coordinate c : this.coordinates){
-            this.rrmosaic.getTile(c).changeLuminosity(value);
+            System.out.println(c.toString());
+            // this.rrmosaic.getTile(c).changeLuminosity(value);
         }
     }
 

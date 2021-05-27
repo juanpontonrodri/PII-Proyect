@@ -4,7 +4,7 @@ import java.util.*;
 public class MosaicProject{
 
     public static void main(String[] args) {	
-        String file=args[1];
+        String file=args[0];
         Mosaic mosaic=null;	
         Scanner input=null;
         int value;
@@ -24,7 +24,7 @@ public class MosaicProject{
             line=input.nextLine();
             System.out.println(line);
             String inst=line.substring(0, line.indexOf(" "));
-            System.out.println(inst);
+            // System.out.println(inst);
             String argument=line.substring(line.indexOf(" ")+1,line.length());
             System.out.println(argument);
 
@@ -35,15 +35,14 @@ public class MosaicProject{
                 case "CreateRegion":
                     String name=argument.substring(0,argument.indexOf(","));
                     int coma1=argument.indexOf(",", argument.indexOf(",")+1);
-                    int orow=Integer.parseInt(argument.substring(argument.indexOf(","), coma1));
+                    int r0=Integer.parseInt(argument.substring(argument.indexOf(",")+1, coma1));
                     int coma2=argument.indexOf(",",coma1+1);
-                    int ocol=Integer.parseInt(argument.substring(coma1+1, coma2));
+                    int c0=Integer.parseInt(argument.substring(coma1+1, coma2));
                     int coma3=argument.indexOf(",",coma2+1);
-                    int heigh=Integer.parseInt(argument.substring(coma2+1, coma3));
-                    int width=Integer.parseInt(argument.substring(coma3+1,argument.length()));
-                    System.out.println(name+" "+orow+" "+ocol+" "+heigh+" "+width);
-                    if(mosaic!=null)mosaic.addRegion(new RectangularRegion(mosaic, name, orow, ocol, heigh, width));
-
+                    int h=Integer.parseInt(argument.substring(coma2+1, coma3));
+                    int w=Integer.parseInt(argument.substring(coma3+1,argument.length()));
+                    // System.out.println(name+" "+orow+" "+ocol+" "+heigh+" "+width);
+                    if(mosaic!=null)mosaic.addRegion(new RectangularRegion(mosaic,name, r0, c0, h, w));
                     break;
                 case "ChangeLuminosityMosaic":
                     value=Integer.parseInt(argument);
@@ -52,6 +51,9 @@ public class MosaicProject{
                 case "ChangeLuminosityRegion":
                     value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     regionname=argument.substring(argument.indexOf(",")+1,argument.length());
+                    System.out.println(value);
+                    System.out.println(regionname);
+                    System.out.println(mosaic.getRegion(regionname).toString());
                     if(mosaic!=null)mosaic.getRegion(regionname).changeLuminosity(value);
                     break;
                 case "ChangeLuminosityTile":
