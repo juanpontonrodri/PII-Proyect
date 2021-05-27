@@ -6,7 +6,6 @@ public class MosaicProject{
     public static void main(String[] args) {	
         String file=args[1];
         Mosaic mosaic=null;	
-        // RectangularRegion region=null;
         Scanner input=null;
         int value;
         int status;

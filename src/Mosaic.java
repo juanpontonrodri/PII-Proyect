@@ -159,17 +159,27 @@ public class Mosaic implements Luminosity{
         int b;
         for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()) {
             Tile tile = object.getValue();
-            if(tile.getLuminosityChange()!=0){
+            if(tile.getStatus()==0){
+                tile.setColor(Color.BLACK());
+                tile.getFigure().setColor(Color.BLACK());
+            }
+            if((tile.getStatus()==1)&&(tile.getLuminosityChange()!=0)){
+                    r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
+                    g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
+                    b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
+                    tile.setColor(new Color(r, g, b));
+    
+                    r=(tile.getLuminosityChange()+tile.getFigure().getColor().getR())%256;
+                    g=(tile.getLuminosityChange()+tile.getFigure().getColor().getG())%256;
+                    b=(tile.getLuminosityChange()+tile.getFigure().getColor().getB())%256;
+                    tile.getFigure().setColor(new Color(r, g, b));
+            }
+            if((tile.getStatus()==2)&&(tile.getLuminosityChange()!=0)){
+                tile.getFigure().setColor(Color.BLACK());
                 r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
                 g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
                 b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
                 tile.setColor(new Color(r, g, b));
-
-                r=(tile.getLuminosityChange()+tile.getFigure().getColor().getR())%256;
-                g=(tile.getLuminosityChange()+tile.getFigure().getColor().getG())%256;
-                b=(tile.getLuminosityChange()+tile.getFigure().getColor().getB())%256;
-                tile.getFigure().setColor(new Color(r, g, b));
-                
             }
         }
 
