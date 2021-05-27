@@ -18,7 +18,15 @@ public class Mosaic implements Luminosity{
 		input = new Scanner (new FileInputStream(file)) ;
 }
 	catch (FileNotFoundException e) {
-		System.out.println("File open error");
+        PrintWriter eprint = null;       
+            try {      
+                eprint = new PrintWriter (new FileOutputStream("error.txt"));              
+            }
+            catch (FileNotFoundException ef) {
+                System.exit(-1);
+            }        
+            eprint.println("FileNotFoundException");
+            eprint.close();
 		System.exit(-1);
 }
 
@@ -188,7 +196,15 @@ public class Mosaic implements Luminosity{
             output = new PrintWriter (new FileOutputStream(file));              
         }
         catch (FileNotFoundException e) {
-            System.out.println("Error creating the file");
+            PrintWriter eprint = null;       
+            try {      
+                eprint = new PrintWriter (new FileOutputStream("error.txt"));              
+            }
+            catch (FileNotFoundException ef) {
+                System.exit(-1);
+            }        
+            eprint.println("FileNotFoundException");
+            eprint.close();
             System.exit(-1);
         }        
         output.println(this.toString());

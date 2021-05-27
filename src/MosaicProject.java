@@ -16,8 +16,7 @@ public class MosaicProject{
 	    try {
 		    input = new Scanner (new FileInputStream(file)) ;
         }
-	    catch (FileNotFoundException e) {
-	    	System.out.println("Instruction file open error");
+	    catch (FileNotFoundException e) {            
     		System.exit(-1);
         }   
         String line=null;
@@ -83,23 +82,22 @@ public class MosaicProject{
                         output = new PrintWriter (new FileOutputStream(argument));              
                     }
                     catch (FileNotFoundException e) {
-                        System.out.println("FileNotFoundException");
+                        PrintWriter eprint = null;       
+                        try {      
+                            eprint = new PrintWriter (new FileOutputStream("error.txt"));              
+                        }
+                        catch (FileNotFoundException ef) {
+                            System.exit(-1);
+                        }        
+                        eprint.println("FileNotFoundException");
+                        eprint.close();
                         System.exit(-1);
                     }        
                     if(mosaic!=null)output.println(mosaic.toStringRegions());
                     output.close();
                     break;
                 case "SaveMosaic":
-                    output = null;       
-                    try {      
-                        output = new PrintWriter (new FileOutputStream(argument));              
-                    }
-                    catch (FileNotFoundException e) {
-                        System.out.println("FileNotFoundException");
-                        System.exit(-1);
-                    }        
                     if(mosaic!=null)mosaic.saveToFile(argument);
-                    output.close();
                     break;
                 default:
                     break;
