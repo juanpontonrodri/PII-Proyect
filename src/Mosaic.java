@@ -72,6 +72,22 @@ public class Mosaic implements Luminosity{
                     int stus = Integer.parseInt(line.substring(line.indexOf(":")+1,line.indexOf("{")));
                     String large = line.substring(line.indexOf("{")+1,line.length());
                     large=large.toUpperCase();
+
+                    try{
+                        if((r>this.rows)||(c>this.columns)) throw new TileOutOfBoundsException();
+                    }
+                    catch (TileOutOfBoundsException exception){
+                        PrintWriter p = null;       
+                        try {      
+                            p = new PrintWriter (new FileOutputStream("error.txt"));              
+                        }
+                        catch (FileNotFoundException ef) {
+                            System.exit(-1);
+                        }        
+                        p.println(exception.getMessage());
+                        p.close();
+                        System.exit(-1);
+                    }
                     
                     if (large.indexOf(":")==(-1)){                                            
                         String tilergb = large.substring (0,large.length()-1);
