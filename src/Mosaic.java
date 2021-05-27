@@ -218,7 +218,7 @@ public class Mosaic implements Luminosity{
             eprint.close();
             System.exit(-1);
         }        
-        output.println(this.toString());
+        output.print(this.toString());
         output.close();
         }
     
