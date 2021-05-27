@@ -41,7 +41,7 @@ public class MosaicProject{
                     int coma3=argument.indexOf(",",coma2+1);
                     int h=Integer.parseInt(argument.substring(coma2+1, coma3));
                     int w=Integer.parseInt(argument.substring(coma3+1,argument.length()));
-                    // System.out.println(name+" "+orow+" "+ocol+" "+heigh+" "+width);
+                    // System.out.println(name+" "+r0+" "+c0+" "+h+" "+w);
                     if(mosaic!=null)mosaic.addRegion(new RectangularRegion(mosaic,name, r0, c0, h, w));
                     break;
                 case "ChangeLuminosityMosaic":
@@ -59,7 +59,7 @@ public class MosaicProject{
                 case "ChangeLuminosityTile":
                     value=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     row=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
-                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1), argument.length()));
+                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1)+1, argument.length()));
                     System.out.println(row+""+column);
                     if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).changeLuminosity(value);
                     break;
@@ -74,7 +74,7 @@ public class MosaicProject{
                 case "ChangeStatusTile":
                     status=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     row=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
-                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1),argument.length()));
+                    column=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1)+1,argument.length()));
                     if(mosaic!=null)mosaic.getTile(new Coordinate(row, column)).setStatus(status);
                     break;
                 case "SortRegionsByArea":
@@ -95,7 +95,7 @@ public class MosaicProject{
                         eprint.close();
                         System.exit(-1);
                     }        
-                    if(mosaic!=null)output.println(mosaic.toStringRegions());
+                    if(mosaic!=null)output.print(mosaic.toStringRegions());
                     output.close();
                     break;
                 case "SaveMosaic":

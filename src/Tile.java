@@ -121,14 +121,9 @@ public class Tile implements Luminosity{
     }
     public String toString(){
         if (this.figure==null) return (this.status + "{" + this.color.toString() +"}");
-        else{
-            if (this.figure instanceof Circle) return (this.status + "{" + this.color.toString() + ",CIR:{" + this.figure.getColor().toString() + "," + this.position + "," + ((Circle)this.getFigure()).getRadius() + "}" + "}");
-            else {
-               if (this.figure instanceof Rectangle) return (this.status + "{" + this.color.toString() + ",REC:{" + this.figure.getColor().toString() + "," + this.position + "," + ((Rectangle)this.getFigure()).getHeight() + "," + ((Rectangle)this.getFigure()).getWidth() + "}" + "}");
-               else return "error at Tile.toString";
-            }
-            
-        }
-        
+        if (this.figure instanceof Circle) return (this.status + "{" + this.color.toString() + ",CIR:{" + this.figure.getColor().toString() + "," + this.position + "," + ((Circle)this.getFigure()).getRadius() + "}" + "}");
+        if (this.figure instanceof Rectangle) return (this.status + "{" + this.color.toString() + ",REC:{" + this.figure.getColor().toString() + "," + this.position + "," + ((Rectangle)this.getFigure()).getHeight() + "," + ((Rectangle)this.getFigure()).getWidth() + "}" + "}");
+        return "If you reach this, update the code to the new figures";
     }
 }
+

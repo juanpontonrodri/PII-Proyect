@@ -67,8 +67,8 @@ public class Mosaic implements Luminosity{
                     }
                     
                     String arrpos = line.substring (0,line.indexOf(":"));
-                    int r=(Integer.parseInt(arrpos.substring(1,arrpos.indexOf(",")))-1);
-                    int c=(Integer.parseInt(arrpos.substring(arrpos.indexOf(",")+1,arrpos.indexOf(")")))-1);                   
+                    int r=(Integer.parseInt(arrpos.substring(1,arrpos.indexOf(","))));
+                    int c=(Integer.parseInt(arrpos.substring(arrpos.indexOf(",")+1,arrpos.indexOf(")"))));                   
                     int stus = Integer.parseInt(line.substring(line.indexOf(":")+1,line.indexOf("{")));
                     String large = line.substring(line.indexOf("{")+1,line.length());
                     large=large.toUpperCase();
@@ -140,28 +140,31 @@ public class Mosaic implements Luminosity{
    
 
     public void initialize(){ 
-        boolean whitecheck=false;
-        while(!whitecheck){
-        int i=0;
-        int j=0; 
-        for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){     
-            if(i==this.rows) break;   
-            Coordinate coordinate = object.getKey();
-            if(!coordinate.equals(new Coordinate(i,j))) {
-                this.mapTiles.put(new Coordinate(i, j),new Tile(Color.WHITE(),1));
-                whitecheck=false;
-                break;
-                }
-            whitecheck=true;
-            if (j==(this.columns-1)) {
-                i++;
-                j=0; 
-            }
-            else j++;
+    //     boolean whitecheck=false;
+    //     while(!whitecheck){
+    //     int i=1;
+    //     int j=1; 
+    //     for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){     
+    //         if(i>this.rows) break;   
+    //         Coordinate coordinate = object.getKey();
+    //         if(!coordinate.equals(new Coordinate(i,j))) {
+    //             this.mapTiles.put(new Coordinate(i, j),new Tile(Color.WHITE(),1));
+    //             System.out.println("initialize"+i+""+j);
+    //             whitecheck=false;
+    //             break;
+    //             }
+    //         whitecheck=true;
+    //         if (j==(this.columns)) {
+    //             i++;
+    //             j=1; 
+    //         }
+    //         else j++;
 
-        }}
-         
-
+    //     }}
+    for(int i=1; i<=this.rows;i++){
+        for (int k = 1; k <= this.columns; k++) {
+            if(this.getTile(new Coordinate(i, k))==null)this.mapTiles.put(new Coordinate(i, k),new Tile(Color.WHITE(),1));
+    }}
     }
     
    
@@ -171,7 +174,7 @@ public class Mosaic implements Luminosity{
         for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){
             Tile tile = object.getValue();
             Coordinate coordinate = object.getKey();
-            linep=linep.concat("\n" + "(" + (coordinate.getRow()+1) + "," + (coordinate.getColumn()+1) + ")" + ":" + tile.toString());
+            linep=linep.concat("\n" + "(" + (coordinate.getRow()) + "," + (coordinate.getColumn()) + ")" + ":" + tile.toString());
             }
         
         return linep;       
@@ -185,25 +188,28 @@ public class Mosaic implements Luminosity{
             Tile tile = object.getValue();
             if(tile.getStatus()==0){
                 tile.setColor(Color.BLACK());
-                tile.getFigure().setColor(Color.BLACK());
+                if(tile.hasFigure())tile.getFigure().setColor(Color.BLACK());
             }
             if((tile.getStatus()==1)&&(tile.getLuminosityChange()!=0)){
                     r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
                     g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
                     b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
                     tile.setColor(new Color(r, g, b));
-    
-                    r=(tile.getLuminosityChange()+tile.getFigure().getColor().getR())%256;
-                    g=(tile.getLuminosityChange()+tile.getFigure().getColor().getG())%256;
-                    b=(tile.getLuminosityChange()+tile.getFigure().getColor().getB())%256;
-                    tile.getFigure().setColor(new Color(r, g, b));
+                    if (tile.hasFigure()){
+                        r=(tile.getLuminosityChange()+tile.getFigure().getColor().getR())%256;
+                        g=(tile.getLuminosityChange()+tile.getFigure().getColor().getG())%256;
+                        b=(tile.getLuminosityChange()+tile.getFigure().getColor().getB())%256;
+                        tile.getFigure().setColor(new Color(r, g, b));
+                    }
             }
-            if((tile.getStatus()==2)&&(tile.getLuminosityChange()!=0)){
-                tile.getFigure().setColor(Color.BLACK());
-                r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
-                g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
-                b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
-                tile.setColor(new Color(r, g, b));
+            if((tile.getStatus()==2)){
+                if(tile.hasFigure())tile.getFigure().setColor(Color.BLACK());
+                if(tile.getLuminosityChange()!=0){
+                    r=(tile.getLuminosityChange()+tile.getColor().getR())%256;
+                    g=(tile.getLuminosityChange()+tile.getColor().getG())%256;
+                    b=(tile.getLuminosityChange()+tile.getColor().getB())%256;
+                    tile.setColor(new Color(r, g, b));
+                }
             }
         }
 
@@ -256,6 +262,7 @@ public class Mosaic implements Luminosity{
 
     public Tile getTile(Coordinate c){
         return mapTiles.getOrDefault(c, null);
+        // return mapTiles.get(c);
         }
 
     public Collection<String>listFigureClasses(){
