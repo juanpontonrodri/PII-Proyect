@@ -100,5 +100,5 @@ public class MosaicProject{
             }
         }
         input.close();
-        }
+    }
 }
