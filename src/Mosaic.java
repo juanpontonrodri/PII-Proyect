@@ -218,7 +218,6 @@ public class Mosaic implements Luminosity{
         return string;
     }
     
-
     public Collection<String>listFigureClasses(){
         ArrayList<String> figclas= new ArrayList<>();
         boolean isalready;
