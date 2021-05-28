@@ -131,27 +131,6 @@ public class Mosaic implements Luminosity{
    
 
     public void initialize(){ 
-    //     boolean whitecheck=false;
-    //     while(!whitecheck){
-    //     int i=1;
-    //     int j=1; 
-    //     for (Map.Entry<Coordinate,Tile> object : mapTiles.entrySet()){     
-    //         if(i>this.rows) break;   
-    //         Coordinate coordinate = object.getKey();
-    //         if(!coordinate.equals(new Coordinate(i,j))) {
-    //             this.mapTiles.put(new Coordinate(i, j),new Tile(Color.WHITE(),1));
-    //             System.out.println("initialize"+i+""+j);
-    //             whitecheck=false;
-    //             break;
-    //             }
-    //         whitecheck=true;
-    //         if (j==(this.columns)) {
-    //             i++;
-    //             j=1; 
-    //         }
-    //         else j++;
-
-    //     }}
         for(int i=1; i<=this.rows;i++){
             for (int k = 1; k <= this.columns; k++) {
                 if(this.getTile(new Coordinate(i, k))==null)this.mapTiles.put(new Coordinate(i, k),new Tile(Color.WHITE(),1));
