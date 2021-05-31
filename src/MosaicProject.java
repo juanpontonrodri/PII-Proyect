@@ -18,11 +18,8 @@ public class MosaicProject{
         String line=null;
         while(input.hasNextLine()){
             line=input.nextLine();
-            // System.out.println(line);
             String inst=line.substring(0, line.indexOf(" "));
-            // System.out.println(inst);
             String argument=line.substring(line.indexOf(" ")+1,line.length());
-            // System.out.println(argument);
 
             switch (inst) {
                 case "ReadMosaic":
@@ -38,39 +35,39 @@ public class MosaicProject{
                     int h=Integer.parseInt(argument.substring(coma2+1, coma3));
                     int w=Integer.parseInt(argument.substring(coma3+1,argument.length()));
 
-                    if(mosaic!=null)mosaic.addRegion(new RectangularRegion(mosaic,name, r0, c0, h, w));
+                    mosaic.addRegion(mosaic.new RectangularRegion(mosaic,name, r0, c0, h, w));
                     break;
                 case "ChangeLuminosityMosaic":
                     int valueLM=Integer.parseInt(argument);
-                    if(mosaic!=null)mosaic.changeLuminosity(valueLM);
+                    mosaic.changeLuminosity(valueLM);
                     break;
                 case "ChangeLuminosityRegion":
                     int valueLR=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     String regionnameL=argument.substring(argument.indexOf(",")+1,argument.length());
-                    if(mosaic!=null)mosaic.getRegion(regionnameL).changeLuminosity(valueLR);
+                    mosaic.getRegion(regionnameL).changeLuminosity(valueLR);
                     break;
                 case "ChangeLuminosityTile":
                     int valueLT=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     int rowL=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
                     int columnL=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1)+1, argument.length()));
-                    if(mosaic!=null)mosaic.getTile(new Coordinate(rowL, columnL)).changeLuminosity(valueLT);
+                    mosaic.getTile(new Coordinate(rowL, columnL)).changeLuminosity(valueLT);
                     break;
                 case "ChangeStatusMosaic":
-                    if(mosaic!=null)mosaic.changeStatus(Integer.parseInt(argument));
+                    mosaic.changeStatus(Integer.parseInt(argument));
                     break;
                 case "ChangeStatusRegion":
                     int statusR=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     String regionnameS=argument.substring(argument.indexOf(",")+1,argument.length());
-                    if(mosaic!=null)mosaic.getRegion(regionnameS).changeStatus(statusR);
+                    mosaic.getRegion(regionnameS).changeStatus(statusR);
                     break;
                 case "ChangeStatusTile":
                     int statusT=Integer.parseInt(argument.substring(0,argument.indexOf(",")));
                     int rowT=Integer.parseInt(argument.substring(argument.indexOf(",")+1,argument.indexOf(",",argument.indexOf(",")+1)));
                     int columnT=Integer.parseInt(argument.substring(argument.indexOf(",",argument.indexOf(",")+1)+1,argument.length()));
-                    if(mosaic!=null)mosaic.getTile(new Coordinate(rowT, columnT)).setStatus(statusT);
+                    mosaic.getTile(new Coordinate(rowT, columnT)).setStatus(statusT);
                     break;
                 case "SortRegionsByArea":
-                    if(mosaic!=null)mosaic.sortRegionsByAreaAsc();
+                    mosaic.sortRegionsByAreaAsc();
 
                     PrintWriter output = null;       
                     try {      
@@ -89,11 +86,11 @@ public class MosaicProject{
                         System.exit(-1);
                     }        
 
-                    if(mosaic!=null)output.print(mosaic.toStringRegions());
+                    output.print(mosaic.toStringRegions());
                     output.close();
                     break;
                 case "SaveMosaic":
-                    if(mosaic!=null)mosaic.saveToFile(argument);
+                    mosaic.saveToFile(argument);
                     break;
                 default:
                     break;
