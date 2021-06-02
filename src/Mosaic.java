@@ -412,13 +412,6 @@ public class Mosaic implements Luminosity{
                 this.rrmosaic.getTile(c).setStatus(status);
             }
         }
-        
-        /**
-         * Method of the region that sorts its coordinates by ascending order.
-         */
-        public void sortByCoordinateAsc(){
-            if (this.coordinates!=null)Collections.sort(this.coordinates);
-        }
      
         /**
          * Method of the region that shuffle its coordinates.

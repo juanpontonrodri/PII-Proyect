@@ -3,7 +3,7 @@
  * @author Juan.
  * @version 2.0.
  */
-public class Coordinate implements Comparable<Coordinate>{
+public class Coordinate{
     private int row;
     private int column;
 
@@ -25,22 +25,6 @@ public class Coordinate implements Comparable<Coordinate>{
     public String toString(){
         return "("+this.row+","+this.column+")";
     }
-
-    /**
-     * Method that compares the coordinate passed by argument with the object from wich the method is invoked  in order to compare them by ascending coordinate.
-     * @param c The coordinate to be compared with.
-     * @return 1 if its indexes are higher, -1 if they are lower and 0 if they are equal.
-     */
-    public int compareTo(Coordinate c) { //compares by ascendig coordinate
-        if (this.equals(c)) return 0;
-		if (row< c.getRow()) return -1;
-		else 
-			if (row == c.getRow()){
-                if (this.column>c.getColumn()) return 1;
-                else return -1; 
-            } 
-			else return 1;
-	}
     
     /**
      * Method that compares the coordinate passed by argument with the object from wich the method is invoked in order to see if theyre attributes are equal.
